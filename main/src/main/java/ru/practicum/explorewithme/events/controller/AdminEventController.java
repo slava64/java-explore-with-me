@@ -37,7 +37,7 @@ public class AdminEventController {
             @RequestParam(value = "size", defaultValue = "10") @Positive Integer size
     ) {
         if (states != null) {
-            for(String state : states) {
+            for (String state : states) {
                 State.from(state).orElseThrow(
                         () -> new BadRequestException(String.format("Не известный статус: %s", state))
                 );

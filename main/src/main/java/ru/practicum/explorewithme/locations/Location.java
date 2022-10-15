@@ -3,11 +3,9 @@ package ru.practicum.explorewithme.locations;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.practicum.explorewithme.compilations.Compilation;
 import ru.practicum.explorewithme.events.Event;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity

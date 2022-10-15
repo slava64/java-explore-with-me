@@ -1,8 +1,6 @@
 package ru.practicum.explorewithme.events.service;
 
-import ru.practicum.explorewithme.events.State;
 import ru.practicum.explorewithme.events.dto.EventDto;
-import ru.practicum.explorewithme.events.dto.NewEventDto;
 import ru.practicum.explorewithme.events.dto.UpdateEventAdminDto;
 
 import java.time.LocalDateTime;

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class CompilationRepositoryImpl implements CompilationRepositoryCustom{
+public class CompilationRepositoryImpl implements CompilationRepositoryCustom {
     private final EntityManager em;
 
     @Override

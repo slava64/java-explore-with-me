@@ -1,7 +1,6 @@
 package ru.practicum.explorewithme.requests.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.practicum.explorewithme.events.State;
 import ru.practicum.explorewithme.requests.Request;
 import ru.practicum.explorewithme.requests.Status;
 

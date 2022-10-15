@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PublicEventServiceImpl implements PublicEventService{
+public class PublicEventServiceImpl implements PublicEventService {
     private final EventRepository eventRepository;
 
     @Override

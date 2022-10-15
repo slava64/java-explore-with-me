@@ -5,7 +5,6 @@ import lombok.Setter;
 import lombok.ToString;
 import ru.practicum.explorewithme.compilations.Compilation;
 import ru.practicum.explorewithme.events.Event;
-import ru.practicum.explorewithme.events.State;
 import ru.practicum.explorewithme.users.User;
 
 import javax.persistence.*;

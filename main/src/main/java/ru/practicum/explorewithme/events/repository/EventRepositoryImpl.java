@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.practicum.explorewithme.events.Event;
 import ru.practicum.explorewithme.events.Sort;
 import ru.practicum.explorewithme.events.State;
-import ru.practicum.explorewithme.requests.Request;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
