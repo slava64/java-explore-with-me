@@ -1,19 +1,19 @@
 version: '3.8'
 services:
-  main:
+  ewm-service:
     build: ./main/
     image: "main_image"
     container_name: "main_service"
     ports:
       - "8080:8080"
     depends_on:
-      - stats
-      - db-main
+      - stats-server
+      - ewm-db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_main:5432/explorewithme
       - STATS_URL=http://stats_service:9090
 
-  db-main:
+  ewm-db:
     image: postgres:13.7-alpine
     container_name: "db_main"
     ports:
@@ -23,18 +23,18 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
 
-  stats:
+  stats-server:
     build: ./stats/
     image: "stats_image"
     container_name: "stats_service"
     ports:
       - "9090:9090"
     depends_on:
-      - db-stats
+      - stats-db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db_stats:5432/explorewithme
 
-  db-stats:
+  stats-db:
     image: postgres:13.7-alpine
     container_name: "db_stats"
     ports:
