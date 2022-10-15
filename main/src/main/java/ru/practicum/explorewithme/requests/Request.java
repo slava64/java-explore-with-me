@@ -3,7 +3,6 @@ package ru.practicum.explorewithme.requests;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ru.practicum.explorewithme.compilations.Compilation;
 import ru.practicum.explorewithme.events.Event;
 import ru.practicum.explorewithme.users.User;
 
