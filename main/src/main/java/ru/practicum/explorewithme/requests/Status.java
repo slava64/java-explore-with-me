@@ -5,6 +5,8 @@ public enum Status {
     PENDING,
     // Опубликовано
     CONFIRMED,
-    // Отменено
-    REJECTED;
+    // Отклоненный
+    REJECTED,
+    // Отмена
+    CANCELED;
 }

@@ -73,7 +73,7 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
         if (request.getStatus().equals(Status.CONFIRMED)) {
             throw new BadRequestException("Запрос уже подтвержден");
         }
-        request.setStatus(Status.REJECTED);
+        request.setStatus(Status.CANCELED);
         Request savedRequest = requestRepository.save(request);
         return RequestMapper.toRequestDto(savedRequest);
     }
