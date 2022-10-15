@@ -33,8 +33,8 @@ public class Request {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Compilation)) return false;
-        return id != null && id.equals(((Compilation) o).getId());
+        if (!(o instanceof Request)) return false;
+        return id != null && id.equals(((Request) o).getId());
     }
 
     @Override
