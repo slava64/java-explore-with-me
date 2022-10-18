@@ -1,15 +1,21 @@
 package ru.practicum.explorewithme.events.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 import ru.practicum.explorewithme.categories.Category;
 import ru.practicum.explorewithme.categories.repository.CategoryRepository;
 import ru.practicum.explorewithme.events.Event;
+import ru.practicum.explorewithme.events.ModerationComment;
 import ru.practicum.explorewithme.events.State;
 import ru.practicum.explorewithme.events.dto.EventDto;
+import ru.practicum.explorewithme.events.dto.ModerationCommentDto;
+import ru.practicum.explorewithme.events.dto.NewModerationCommentDto;
 import ru.practicum.explorewithme.events.dto.UpdateEventAdminDto;
 import ru.practicum.explorewithme.events.mapper.EventMapper;
+import ru.practicum.explorewithme.events.mapper.ModerationCommentMapper;
 import ru.practicum.explorewithme.events.repository.EventRepository;
+import ru.practicum.explorewithme.events.repository.ModerationCommentRepository;
 import ru.practicum.explorewithme.exception.BadRequestException;
 import ru.practicum.explorewithme.exception.NotFoundException;
 import ru.practicum.explorewithme.locations.Location;
@@ -27,6 +33,7 @@ public class AdminEventServiceImpl implements AdminEventService {
     private final EventRepository eventRepository;
     private final CategoryRepository categoryRepository;
     private final LocationRepository locationRepository;
+    private final ModerationCommentRepository moderationCommentRepository;
 
     @Override
     public List<EventDto> getList(
@@ -39,6 +46,12 @@ public class AdminEventServiceImpl implements AdminEventService {
             LocalDateTime rangeEnd
     ) {
         List<Event> eventList = eventRepository.getList(from, size, users, states, categories, rangeStart, rangeEnd);
+        return EventMapper.toEventDto(eventList);
+    }
+
+    @Override
+    public List<EventDto> getListStatusPending(Integer from, Integer size) {
+        List<Event> eventList = eventRepository.getListStatusPending(from, size);
         return EventMapper.toEventDto(eventList);
     }
 
@@ -99,5 +112,18 @@ public class AdminEventServiceImpl implements AdminEventService {
         event.setState(State.CANCELED);
         Event updatedEvent = eventRepository.save(event);
         return EventMapper.toEventDto(updatedEvent);
+    }
+
+    @Override
+    public ModerationCommentDto addModerationComment(Long eventId, NewModerationCommentDto newModerationCommentDto) {
+        Event event = eventRepository.findById(eventId).orElseThrow(
+                () -> new NotFoundException("Событие не найдено")
+        );
+        ModerationComment comment = ModerationCommentMapper.toModerationComment(
+                event, newModerationCommentDto);
+        ModerationComment savedComment = moderationCommentRepository.save(comment);
+        event.setState(State.CANCELED);
+        eventRepository.save(event);
+        return ModerationCommentMapper.toModerationCommentDto(savedComment);
     }
 }

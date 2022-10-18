@@ -124,4 +124,21 @@ public class EventRepositoryImpl implements EventRepositoryCustom {
 
         return typedQuery.getResultList();
     }
+
+    @Override
+    public List<Event> getListStatusPending(Integer from, Integer size) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Event> query = cb.createQuery(Event.class);
+        Root<Event> root = query.from(Event.class);
+
+        List<Predicate> predicates = new ArrayList<>();
+        predicates.add(cb.equal(root.get("state"), State.PENDING));
+        query.select(root).where(predicates.toArray(new Predicate[0]));
+
+        TypedQuery<Event> typedQuery = em.createQuery(query);
+        typedQuery.setFirstResult(from);
+        typedQuery.setMaxResults(size);
+
+        return typedQuery.getResultList();
+    }
 }

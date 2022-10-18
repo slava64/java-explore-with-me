@@ -1,9 +1,6 @@
 package ru.practicum.explorewithme.events.service;
 
-import ru.practicum.explorewithme.events.dto.EventDto;
-import ru.practicum.explorewithme.events.dto.EventShortDto;
-import ru.practicum.explorewithme.events.dto.NewEventDto;
-import ru.practicum.explorewithme.events.dto.UpdateEventDto;
+import ru.practicum.explorewithme.events.dto.*;
 
 import java.util.List;
 
@@ -17,4 +14,6 @@ public interface PrivateEventService {
     EventDto getItem(Long userId, Long eventId);
 
     EventDto cancelItem(Long userId, Long eventId);
+
+    ModerationCommentDto addModerationComment(Long userId, Long eventId, NewModerationCommentDto newModerationCommentDto);
 }

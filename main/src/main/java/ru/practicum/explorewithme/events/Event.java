@@ -60,7 +60,10 @@ public class Event {
     List<Compilation> compilations;
     @OneToMany(mappedBy = "event")
     @ToString.Exclude
-    private List<Request> events;
+    private List<Request> requests;
+    @OneToMany(mappedBy = "event")
+    @ToString.Exclude
+    private List<ModerationComment> moderationComments;
 
     @Override
     public boolean equals(Object o) {

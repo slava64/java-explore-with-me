@@ -7,10 +7,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.explorewithme.events.State;
 import ru.practicum.explorewithme.events.dto.EventDto;
+import ru.practicum.explorewithme.events.dto.ModerationCommentDto;
+import ru.practicum.explorewithme.events.dto.NewModerationCommentDto;
 import ru.practicum.explorewithme.events.dto.UpdateEventAdminDto;
 import ru.practicum.explorewithme.events.service.AdminEventService;
 import ru.practicum.explorewithme.exception.BadRequestException;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
@@ -60,6 +63,15 @@ public class AdminEventController {
         return eventService.getList(from, size, users, states, categories, rangeStart, rangeEnd);
     }
 
+    @GetMapping("/moderation")
+    public List<EventDto> getListStatusPending(
+            @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
+            @RequestParam(value = "size", defaultValue = "10") @Positive Integer size
+    ) {
+        log.info("Get list events status pending: from - {}, size - {}", from, size);
+        return eventService.getListStatusPending(from, size);
+    }
+
     @PutMapping("/{eventId}")
     public EventDto editItem(
             @PathVariable("eventId") @Positive Long eventId,
@@ -78,5 +90,14 @@ public class AdminEventController {
     public EventDto setReject(@Positive @PathVariable("eventId") Long eventId) {
         log.info("Set publish for eventId {}", eventId);
         return eventService.setReject(eventId);
+    }
+
+    @PostMapping("/{eventId}/moderation-comment")
+    public ModerationCommentDto addModerationComment(
+            @Positive @PathVariable("eventId") Long eventId,
+            @Valid @RequestBody NewModerationCommentDto newModerationCommentDto
+    ) {
+        log.info("Add moderation comment {} for event {}", newModerationCommentDto.toString(), eventId);
+        return eventService.addModerationComment(eventId, newModerationCommentDto);
     }
 }

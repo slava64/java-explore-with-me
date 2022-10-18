@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import ru.practicum.explorewithme.categories.Category;
 import ru.practicum.explorewithme.categories.repository.CategoryRepository;
 import ru.practicum.explorewithme.events.Event;
+import ru.practicum.explorewithme.events.ModerationComment;
 import ru.practicum.explorewithme.events.State;
-import ru.practicum.explorewithme.events.dto.EventDto;
-import ru.practicum.explorewithme.events.dto.EventShortDto;
-import ru.practicum.explorewithme.events.dto.NewEventDto;
-import ru.practicum.explorewithme.events.dto.UpdateEventDto;
+import ru.practicum.explorewithme.events.dto.*;
 import ru.practicum.explorewithme.events.mapper.EventMapper;
+import ru.practicum.explorewithme.events.mapper.ModerationCommentMapper;
 import ru.practicum.explorewithme.events.repository.EventRepository;
+import ru.practicum.explorewithme.events.repository.ModerationCommentRepository;
 import ru.practicum.explorewithme.exception.BadRequestException;
 import ru.practicum.explorewithme.exception.NotFoundException;
 import ru.practicum.explorewithme.locations.Location;
@@ -34,6 +34,7 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     private final EventRepository eventRepository;
     private final CategoryRepository categoryRepository;
     private final LocationRepository locationRepository;
+    private final ModerationCommentRepository moderationCommentRepository;
 
     @Override
     public List<EventShortDto> getList(Long userId, Integer from, Integer size) {
@@ -119,5 +120,28 @@ public class PrivateEventServiceImpl implements PrivateEventService {
         event.setState(State.CANCELED);
         Event cancelEvent = eventRepository.save(event);
         return EventMapper.toEventDto(cancelEvent);
+    }
+
+    @Override
+    public ModerationCommentDto addModerationComment(
+            Long userId,
+            Long eventId,
+            NewModerationCommentDto newModerationCommentDto
+    ) {
+        User commentator = userRepository.findById(userId).orElseThrow(
+                () -> new NotFoundException("Пользователь не найден")
+        );
+        Event event = eventRepository.findById(eventId).orElseThrow(
+                () -> new NotFoundException("Событие не найдено")
+        );
+        if (!event.getInitiator().equals(commentator)) {
+            throw new BadRequestException("Только владелец события может оставлять комментарий");
+        }
+        ModerationComment comment = ModerationCommentMapper.toModerationComment(
+                event, newModerationCommentDto, commentator);
+        ModerationComment savedComment = moderationCommentRepository.save(comment);
+        event.setState(State.PENDING);
+        eventRepository.save(event);
+        return ModerationCommentMapper.toModerationCommentDto(savedComment);
     }
 }

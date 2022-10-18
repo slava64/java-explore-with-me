@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import ru.practicum.explorewithme.events.Event;
+import ru.practicum.explorewithme.events.ModerationComment;
 import ru.practicum.explorewithme.requests.Request;
 
 import javax.persistence.*;
@@ -28,6 +29,9 @@ public class User {
     @OneToMany(mappedBy = "requester")
     @ToString.Exclude
     private List<Request> requests;
+    @OneToMany(mappedBy = "commentator")
+    @ToString.Exclude
+    private List<ModerationComment> moderationComments;
 
     @Override
     public boolean equals(Object o) {

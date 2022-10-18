@@ -27,4 +27,6 @@ public interface EventRepositoryCustom {
             Boolean onlyAvailable,
             String sort
     );
+
+    List<Event> getListStatusPending(Integer from, Integer size);
 }

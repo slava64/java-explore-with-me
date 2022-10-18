@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.explorewithme.events.dto.EventDto;
-import ru.practicum.explorewithme.events.dto.EventShortDto;
-import ru.practicum.explorewithme.events.dto.NewEventDto;
-import ru.practicum.explorewithme.events.dto.UpdateEventDto;
+import ru.practicum.explorewithme.events.dto.*;
 import ru.practicum.explorewithme.events.service.PrivateEventService;
 import ru.practicum.explorewithme.exception.BadRequestException;
 
@@ -71,5 +68,15 @@ public class PrivateEventController {
     ) {
         log.info("Cancel event {} for user {}", eventId, userId);
         return eventService.cancelItem(userId, eventId);
+    }
+
+    @PostMapping("/{userId}/events/{eventId}/moderation-comment")
+    public ModerationCommentDto addModerationComment(
+            @Positive @PathVariable("userId") Long userId,
+            @Positive @PathVariable("eventId") Long eventId,
+            @Valid @RequestBody NewModerationCommentDto newModerationCommentDto
+    ) {
+        log.info("Cancel event {} for user {}", eventId, userId);
+        return eventService.addModerationComment(userId, eventId, newModerationCommentDto);
     }
 }
