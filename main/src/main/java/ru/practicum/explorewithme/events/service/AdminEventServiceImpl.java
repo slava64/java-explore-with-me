@@ -1,7 +1,6 @@
 package ru.practicum.explorewithme.events.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 import ru.practicum.explorewithme.categories.Category;
 import ru.practicum.explorewithme.categories.repository.CategoryRepository;
