@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.stats.mapper;
 
+import org.springframework.stereotype.Component;
 import ru.practicum.explorewithme.stats.Stat;
 import ru.practicum.explorewithme.stats.dto.EndpointHit;
 import ru.practicum.explorewithme.stats.dto.NewEndpointHit;
@@ -8,6 +9,7 @@ import ru.practicum.explorewithme.stats.dto.ViewStats;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class StatMapper {
     public static Stat toStat(NewEndpointHit newEndpointHit) {
         Stat stat = new Stat();

@@ -62,17 +62,13 @@ public class AdminCompilationServiceImpl implements AdminCompilationService {
         Event event = eventRepository.findById(eventId).orElseThrow(
                 () -> new NotFoundException(String.format("Событие %d не найдено", eventId))
         );
-        boolean isAdd = true;
         for (Event element : compilation.getEvents()) {
             if (element.getId().equals(event.getId())) {
-                isAdd = false;
-                break;
+                return;
             }
         }
-        if (isAdd) {
-            compilation.getEvents().add(event);
-            compilationRepository.save(compilation);
-        }
+        compilation.getEvents().add(event);
+        compilationRepository.save(compilation);
     }
 
     @Override

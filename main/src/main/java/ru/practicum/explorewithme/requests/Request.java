@@ -26,6 +26,7 @@ public class Request {
     @ManyToOne
     @JoinColumn(name = "requester_id")
     private User requester;
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
 

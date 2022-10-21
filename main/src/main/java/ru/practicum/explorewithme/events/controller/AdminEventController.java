@@ -30,9 +30,9 @@ public class AdminEventController {
             @RequestParam(value = "states", required = false) List<String> states,
             @RequestParam(value = "categories", required = false) List<@Positive Long> categories,
             @RequestParam(value = "rangeStart", required = false)
-            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeStart,
+            LocalDateTime rangeStart,
             @RequestParam(value = "rangeEnd", required = false)
-            @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime rangeEnd,
+            LocalDateTime rangeEnd,
             @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
             @RequestParam(value = "size", defaultValue = "10") @Positive Integer size
     ) {

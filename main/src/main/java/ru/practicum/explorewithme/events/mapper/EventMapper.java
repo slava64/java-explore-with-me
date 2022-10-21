@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.events.mapper;
 
+import org.springframework.stereotype.Component;
 import ru.practicum.explorewithme.categories.Category;
 import ru.practicum.explorewithme.categories.mapper.CategoryMapper;
 import ru.practicum.explorewithme.events.Event;
@@ -13,6 +14,7 @@ import ru.practicum.explorewithme.users.mapper.UserMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class EventMapper {
     public static EventDto toEventDto(Event event) {
         return new EventDto(

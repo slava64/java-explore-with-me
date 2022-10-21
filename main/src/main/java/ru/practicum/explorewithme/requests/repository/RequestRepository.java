@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.requests.repository;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.practicum.explorewithme.requests.Request;
 import ru.practicum.explorewithme.requests.Status;
@@ -11,7 +12,7 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
     Long countByEventId(Long eventId);
 
     // Запросы пользователя
-    List<Request> findByRequesterId(Long requesterId);
+    List<Request> findByRequesterId(Long requesterId, Pageable pageable);
 
     // Запросы пользователя для события
     List<Request> findByRequesterIdAndEventId(Long requesterId, Long eventId);

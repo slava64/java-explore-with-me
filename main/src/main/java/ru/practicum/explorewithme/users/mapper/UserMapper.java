@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.users.mapper;
 
+import org.springframework.stereotype.Component;
 import ru.practicum.explorewithme.users.User;
 import ru.practicum.explorewithme.users.dto.NewUserDto;
 import ru.practicum.explorewithme.users.dto.UserDto;
@@ -8,6 +9,7 @@ import ru.practicum.explorewithme.users.dto.UserShortDto;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class UserMapper {
     public static UserShortDto toUserShortDto(User user) {
         return new UserShortDto(

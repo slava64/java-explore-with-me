@@ -1,5 +1,8 @@
 package ru.practicum.explorewithme.locations;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LocationMapper {
     public static Location toLocation(LocationDto locationDto) {
         Location location = new Location();

@@ -1,6 +1,8 @@
 package ru.practicum.explorewithme.requests.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.explorewithme.events.Event;
@@ -16,6 +18,7 @@ import ru.practicum.explorewithme.requests.repository.RequestRepository;
 import ru.practicum.explorewithme.users.User;
 import ru.practicum.explorewithme.users.repository.UserRepository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
@@ -26,11 +29,13 @@ public class PrivateRequestServiceImpl implements PrivateRequestService {
     private final RequestRepository requestRepository;
 
     @Override
-    public List<RequestDto> getList(Long userId) {
+    public List<RequestDto> getList(Long userId, Integer from, Integer size) {
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new NotFoundException("Пользователь не найден")
         );
-        return RequestMapper.toRequestDto(requestRepository.findByRequesterId(user.getId()));
+        Pageable pageable = PageRequest.of((int) from / size, size);
+        List<Request> requestList = requestRepository.findByRequesterId(user.getId(), pageable);
+        return RequestMapper.toRequestDto(requestList);
     }
 
     @Override

@@ -8,6 +8,7 @@ import ru.practicum.explorewithme.requests.dto.RequestDto;
 import ru.practicum.explorewithme.requests.service.PrivateRequestService;
 
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @RestController
@@ -19,9 +20,13 @@ public class PrivateRequestController {
     private final PrivateRequestService privateRequestService;
 
     @GetMapping("/{userId}/requests")
-    public List<RequestDto> getList(@Positive @PathVariable("userId") Long userId) {
-        log.info("List requests for user {}", userId);
-        return privateRequestService.getList(userId);
+    public List<RequestDto> getList(
+            @Positive @PathVariable("userId") Long userId,
+            @RequestParam(value = "from", defaultValue = "0") @PositiveOrZero Integer from,
+            @RequestParam(value = "size", defaultValue = "10") @Positive Integer size
+    ) {
+        log.info("List requests for user {} from {} size {}", userId, from, size);
+        return privateRequestService.getList(userId, from, size);
     }
 
     @PostMapping("/{userId}/requests")

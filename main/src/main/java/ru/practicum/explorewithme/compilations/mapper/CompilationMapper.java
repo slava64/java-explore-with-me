@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.compilations.mapper;
 
+import org.springframework.stereotype.Component;
 import ru.practicum.explorewithme.compilations.Compilation;
 import ru.practicum.explorewithme.compilations.dto.CompilationDto;
 import ru.practicum.explorewithme.compilations.dto.NewCompilationDto;
@@ -9,6 +10,7 @@ import ru.practicum.explorewithme.events.mapper.EventMapper;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CompilationMapper {
     public static CompilationDto toCompilationDto(Compilation compilation) {
         return new CompilationDto(

@@ -1,5 +1,6 @@
 package ru.practicum.explorewithme.requests.mapper;
 
+import org.springframework.stereotype.Component;
 import ru.practicum.explorewithme.events.Event;
 import ru.practicum.explorewithme.requests.Request;
 import ru.practicum.explorewithme.requests.Status;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class RequestMapper {
     public static Request createRequest(User user, Event event, Status status) {
         Request request = new Request();

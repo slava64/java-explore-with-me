@@ -5,7 +5,7 @@ import ru.practicum.explorewithme.requests.dto.RequestDto;
 import java.util.List;
 
 public interface PrivateRequestService {
-    List<RequestDto> getList(Long userId);
+    List<RequestDto> getList(Long userId, Integer from, Integer size);
 
     RequestDto addItem(Long userId, Long eventId);
 
