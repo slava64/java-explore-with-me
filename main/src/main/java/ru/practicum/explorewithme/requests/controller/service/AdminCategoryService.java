@@ -1,4 +1,4 @@
-package ru.practicum.explorewithme.categories.service;
+package ru.practicum.explorewithme.requests.controller.service;
 
 import ru.practicum.explorewithme.categories.dto.CategoryDto;
 import ru.practicum.explorewithme.categories.dto.NewCategoryDto;

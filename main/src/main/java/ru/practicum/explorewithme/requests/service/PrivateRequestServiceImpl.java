@@ -18,7 +18,6 @@ import ru.practicum.explorewithme.requests.repository.RequestRepository;
 import ru.practicum.explorewithme.users.User;
 import ru.practicum.explorewithme.users.repository.UserRepository;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service

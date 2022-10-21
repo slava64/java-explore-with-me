@@ -1,4 +1,4 @@
-package ru.practicum.explorewithme.categories.service;
+package ru.practicum.explorewithme.requests.controller.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
